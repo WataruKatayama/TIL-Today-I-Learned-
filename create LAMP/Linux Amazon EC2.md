@@ -6,12 +6,12 @@
 5　終了  
 
 # アカウント作成の方法　　
-[google]: https://aws.amazon.com/jp/register-flow/  
-[アカウント作成方法][google]  
+[アカウントの作成方法](https://aws.amazon.com/jp/register-flow/)  
+
 
 # ログイン方法  
 1 AWS公式ホームページにアクセス  
-[AWS公式HP](https://aws.amazon.com/jp){:target="_blank"}
+<a href="https://aws.amazon.com/jp" target="_blank">リンクのテキスト</a>
 
   
  
