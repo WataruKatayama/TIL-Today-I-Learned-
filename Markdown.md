@@ -3,7 +3,11 @@
 [チートシートリンク][Google]   
 
   #別のタブでリンクを開く方法  
-  <a href=”【リンク先のURL】” target=“_blank” rel=”noreferrer noopener”>
-    外部リンクの説明
-</a>
+  以下の関数を追加するとできる
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script language="JavaScript">
+$(document).ready( function () {
+   $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_blank');
+})
+</script>
   
