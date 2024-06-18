@@ -1,5 +1,3 @@
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <script language="JavaScript"> $(document).ready( function () { $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_blank'); }) </script>
-
 # Amazon EC2　の料金の調べ方  
 1 料金タブ  
 2 オンデマンド欄  
@@ -13,7 +11,7 @@
 
 # ログイン方法  
 1 AWS公式ホームページにアクセス  
-  a href=”https://aws.amazon.com/jp” target=“_blank” rel=”noreferrer noopener”
+https://aws.amazon.com/jp
   
  
 
