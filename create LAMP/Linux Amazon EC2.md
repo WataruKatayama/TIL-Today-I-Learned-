@@ -11,5 +11,5 @@
 
 # ログイン方法  
 1 AWS公式ホームページにアクセス  
-[google]: https://aws.amazon.com/jp  
-[ログイン][google]
+https://aws.amazon.com/jp  
+
