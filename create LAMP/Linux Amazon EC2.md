@@ -6,4 +6,5 @@
 5　終了  
 
 # アカウント作成の方法　　
-[google]: https://aws.amazon.com/jp/register-flow/ [アカウント作成方法][Google]
+[google]: https://aws.amazon.com/jp/register-flow/  
+[アカウント作成方法][Google]
