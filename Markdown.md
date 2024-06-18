@@ -3,5 +3,5 @@
 [チートシートリンク][Google]   
 
   #別のタブでリンクを開く方法  
-  <a href="URL" target="_blank" rel="noopener noreferrer">リンク先の説明</a>  
+  ''<a href="URL" target="_blank" rel="noopener noreferrer">リンク先の説明</a> ''  
   
