@@ -11,5 +11,7 @@
 
 # ログイン方法  
 1 AWS公式ホームページにアクセス  
-https://aws.amazon.com/jp  
+  <a href=”https://aws.amazon.com/jp ” target=“_blank” rel=”noreferrer noopener”>
+    外部リンクの説明
+</a> 
 
