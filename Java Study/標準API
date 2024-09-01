@@ -47,4 +47,24 @@ java17DateTime ==> 2021-09-14T14:30
 
 
 //日付を好みの形に成形
+//"表示させたい形式の書式".formated(書式を変えたい対象の変数名)
+//時→%tH 分→%tM 秒→%tS 年→%tYまたは%ty 月→%tm 日→%td 曜日→%tA　
+
+//今月の表示を変えたいとき
+jshell> "%tm月".formatted(today)
+$12 ==> "09月"
+
+//対象を複数にすることも可能
+jshell> "%tH時%tM分".formatted(today , today)
+$14 ==> "03時31分"
+
+//（）内の１つ目以降の変数を省略したい場合は、%の後に<を記載する
+//年、月、日を同時に出力する場合
+jshell> "%tY年%<tm月%<td分".formatted(today)
+$15 ==> "2024年09月02分"
+
+//46行目の　java17DateTime ==> 2021-09-14T14:30　を年,月,時,分に変換
+jshell> "%tY年%<tm月%<td日%<tH時%<tM分".formatted(java17DateTime)
+$17 ==> "2021年09月14日14時30分"
+
 
