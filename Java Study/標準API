@@ -1,1 +1,50 @@
+//importである程度のパッケージ名を省略可能
+//パッケージ名：java.lang java.util java.math java.time java.io java.net java.nio.file javax.swing java.awt
+
+jshell> import java.time.*
+
+
+//指定した日付の表示
+//（）内は日にちを指定　plusDays()は何日後を表示
+
+ LocalDateTime.now().plusDays(3)
+　$4 ==> 2024-09-05T03:24:55.742232400
+
+
+//変数
+//さらに省略したい場合は変数を使う
+
+jshell> var today = LocalDateTime.now()
+today ==> 2024-09-02T03:31:43.026582200
+
+jshell> today
+today ==> 2024-09-02T03:31:43.026582200
+
+
+//日付の指定
+//Java17がリリースされた2021/9/14を表示させる
+
+jshell> var java17date = LocalDate.of(2021 , 9 ,14)
+java17date ==> 2021-09-14
+
+jshell> java17date
+java17date ==> 2021-09-14
+
+
+//時間の指定もできる
+
+jshell> var java17time = LocalTime.of(14 , 30)
+java17time ==> 14:30
+
+jshell> java17time
+java17time ==> 14:30
+
+
+//これまでの変数を組み合わせ、日時を表示
+
+jshell> var java17DateTime = LocalDateTime.of(java17date , java17time)
+java17DateTime ==> 2021-09-14T14:30
+
+
+//日付を好みの形に成形
 
