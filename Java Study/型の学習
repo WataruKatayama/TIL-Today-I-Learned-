@@ -41,6 +41,9 @@ jshell> int j = d
 jshell> int j = (int)d
 j ==> 123
 
+//型の種類
+//int 整数　、double　実数(小数点を含めた数字の事)　、 boolean　論理値(true false)　、char 文字単体　、　String 文字列
+
 
 //フォーマット出力
 
