@@ -68,3 +68,33 @@ jshell> "%tY年%<tm月%<td日%<tH時%<tM分".formatted(java17DateTime)
 $17 ==> "2021年09月14日14時30分"
 
 
+//小数点の計算ではごく小さい誤差が出る返しがでたりする。
+jshell> 579*0.05
+$1 ==> 28.950000000000003
+
+// BigDecimal.valueOf()メソッドを使えば10進数の短い値で返してくれる。
+jshell> BigDecimal.valueOf(579).multiply(BigDecimal.valueOf(0.05))
+$2 ==> 28.95
+
+//長くなるので変数を利用すれば効率がいい
+jshell> var b579 = BigDecimal.valueOf(579)
+b579 ==> 579
+
+jshell> var b005 = BigDecimal.valueOf(0.05)
+b005 ==> 0.05
+
+// BigDecimalメソッドの四則計算では、+-*/の記号は使用できない。
+
+jshell> b579*b005
+|  エラー:
+|  二項演算子'*'のオペランド型が不正です
+|    最初の型: java.math.BigDecimal
+|    2番目の型: java.math.BigDecimal
+|  b579*b005
+
+//足し算　add 引き算　subtract　掛け算　multiply 割り算　divide　余り割り算(余りの表示のみ)　remainder　割り算の結果と余り　divideAndRemainder
+//87行目の計算は以下の通りとなる。
+
+jshell> b579.multiply(b005)
+$5 ==> 28.95
+
