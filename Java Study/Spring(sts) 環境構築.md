@@ -4,7 +4,7 @@
 フレームワーク　Spring  
 実行環境　Open JDK 11  
 総合開発環境　Eclipse  
-ビルドツール　Maven 3.8 
+ビルドツール　Maven 3.8   
 SQL　PostgreSQL 13  
 
   
