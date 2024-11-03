@@ -12,4 +12,8 @@ SQL　PostgreSQL 13
 
 下記のリンクからそれぞれダウンロードし、上記のディレクトリに格納する。  
 Open JDK 11  
-https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=406&field_operating_system_target_id=436&field_architecture_target_id=391&field_java_package_target_id=396
+https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=406&field_operating_system_target_id=436&field_architecture_target_id=391&field_java_package_target_id=396  
+
+PostgreSQL 13  
+https://www.enterprisedb.com/downloads/postgres-postgresql-downloads  
+
