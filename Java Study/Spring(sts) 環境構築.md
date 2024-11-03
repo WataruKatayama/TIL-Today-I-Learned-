@@ -1,9 +1,8 @@
 ## Springの環境構築設定
 
 今回の動作環境は以下のものとする。  
-フレームワーク　Spring  
+開発環境フレームワーク　Spring tools 4 for Eclipse  
 実行環境　Open JDK 11  
-総合開発環境　Eclipse  
 ビルドツール　Maven 3.8   
 SQL　PostgreSQL 13  
 
@@ -16,4 +15,4 @@ https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=
 
 PostgreSQL 13  
 https://www.enterprisedb.com/downloads/postgres-postgresql-downloads  
-
+  
