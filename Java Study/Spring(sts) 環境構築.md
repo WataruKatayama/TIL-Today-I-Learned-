@@ -33,5 +33,5 @@ https://spring.io/tools
 インストール先  
 C:/Tools/  
 
-※Mavenは下記のリンクにある「File」項目の「Binary zip archive(file)」からダウンロードする。  
+※Mavenは下記のリンクにある「File」項目の「Binary zip archive(Link列)」からダウンロードする。  
 https://maven.apache.org/download.cgi  
