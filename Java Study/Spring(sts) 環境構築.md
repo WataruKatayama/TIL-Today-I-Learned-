@@ -1,10 +1,10 @@
 # Springの環境構築設定
 
 今回の動作環境は以下のものとする。  
-開発環境フレームワーク　Spring tools 4 for Eclipse  
-実行環境　Open JDK 11  
-ビルドツール　Maven 3.8   
-SQL　PostgreSQL 13  
+### ・開発環境フレームワーク：　Spring tools 4 for Eclipse  
+### ・実行環境：　Open JDK 11  
+### ・ビルドツール：　Maven 3.8   
+### ・SQL：　PostgreSQL 13  
 
 今回はわかりやすくするため、上記のツールを下記のディレクトリにひとまとめに格納することとする。  
 C:/Tools  
