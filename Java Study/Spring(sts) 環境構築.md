@@ -39,3 +39,17 @@ C:/Tools/
 
 ※Mavenは下記のリンクにある「File」項目の「Binary zip archive(Link列)」からダウンロードする。  
 https://maven.apache.org/download.cgi  
+
+
+### ⓶PCに環境変数を設定する  
+・windowsの場合  
+1)スタートメニューバーから環境変数で検索  
+2)「システム環境変数の編集」を選択  
+3)「システムのプロパティ」ウィンドウが開くので、「環境変数(N)」を選択  
+4)「PATH」をクリックし、「編集(E)」を選択  
+5)「新規(N)」をクリックし以下のリンク(binまでのリンク)を追加する  
+  ※下記のリンクは自分のリンクをコピペしただけなので、下記をそのままコピペせず、  
+  　詳しいbinまでのリンクは自分のものをコピペすること。  
+  ・C:\tools\PostgreSQL\13\bin  
+  ・C:\tools\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin  
+  ・C:\tools\apache-maven-3.9.9\bin  
