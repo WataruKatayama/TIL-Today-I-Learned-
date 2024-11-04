@@ -53,3 +53,16 @@ https://maven.apache.org/download.cgi
   ・C:\tools\PostgreSQL\13\bin  
   ・C:\tools\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin  
   ・C:\tools\apache-maven-3.9.9\bin  
+
+・Macの場合  
+1)まずはターミナル(windowsでいうcmd)を開いて、MacのShell確認をする  
+  使用コマンド　echo $SHELL  
+  ※通常は、zsh か bash かのどちらかになる  
+  　zshの場合：.zshrc ファイル  
+　　bashの場合：.bash_profile ファイル  
+2)自分のホームディレクトリに移動する  
+　使用コマンド　cd ~  
+3)今の環境に設定ファイルはあるかどうか確認し、なかった場合は作成する  
+　使用コマンド　確認　ls -al　、　作成　touch .zshrc  
+ 
+ 
