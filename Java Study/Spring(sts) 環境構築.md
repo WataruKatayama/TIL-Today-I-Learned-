@@ -114,7 +114,7 @@ artifactId : macchinetta-batch-tutorial
 version : 1.0.0-SNAPSHOT  
 package : com.example.batch.tutorial  
 
-4)Enterで「BUILD SUCCESS」が出ることを確認する。  
+4)y（yesという意味)を入力した後ににEnterで「BUILD SUCCESS」が出ることを確認する。  
 ```bash
 C:\xxx>mvn archetype:generate -DarchetypeGroupId=com.github.macchinetta.blank -DarchetypeArtifactId=macchinetta-batch-archetype -DarchetypeVersion=2.3.0.RELEASE
 [INFO] Scanning for projects&#8230;&#8203;
@@ -155,6 +155,22 @@ C:\xxx>mvn archetype:generate -DarchetypeGroupId=com.github.macchinetta.blank -D
   [INFO] Final Memory: 16M/197M
   [INFO] ------------------------------------------------------------------------
 ```
+
+5)macchinetta-batch-tutorialというプロジェクトが/Tools下に作成されたので、macchinetta-batch-tutorialのディレクトリがあるか確認する。  
+ ※cdコマンドで「macchinetta-batch-tutorial」が存在するか確認できる。存在していたら作成されたということ。  
+ ※実際にエクスプローラーで確認してもよい。
+ ```bash
+cd macchinetta-batch-tutorial
+```
+
+6)作成されたプロジェクトをきれいに整理する。  
+  コマンド  
+  ```bash
+  mvn clean dependency:copy-dependencies -DoutputDirectory=lib package
+  ```
+
+7)///
+
 
 
 
