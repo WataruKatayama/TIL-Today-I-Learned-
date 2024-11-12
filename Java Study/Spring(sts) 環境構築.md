@@ -74,7 +74,10 @@ https://maven.apache.org/download.cgi
 　※もしコマンド無効のコメントが返ってきた場合は、PATHをリセットする必要があるので、以下のコマンド操作を行う。  
  　　 環境変数のパス　リセットコマンド  
 　　　ターミナルで以下のコマンドをそのままコピペ  
+     ```bash
 　　　export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin  
+   ```
+
 
 　　　ls -a でファイル一覧が表示されるか確認する。  
 
