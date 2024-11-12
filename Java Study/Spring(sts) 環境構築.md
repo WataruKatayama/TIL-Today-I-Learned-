@@ -74,7 +74,9 @@ https://maven.apache.org/download.cgi
 　※もしコマンド無効のコメントが返ってきた場合は、PATHをリセットする必要があるので、以下のコマンド操作を行う。  
  　　 環境変数のパス　リセットコマンド  
 　　　ターミナルで以下のコマンドをそのままコピペ  
-     ```bash export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin  ```
+     ```
+     export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin  
+     ```  
 
 
 　　　ls -a でファイル一覧が表示されるか確認する。  
@@ -84,10 +86,10 @@ https://maven.apache.org/download.cgi
    
 6).zshrcファイルのウィンドウの中に直接下記のコマンドを記述し、環境変数のパスを登録する。(/binまでのパスを記述する)  
 
-  　```bash export PATH="追加したいパス:追加したいパス:追加したいパス:$PATH"  ```
+  　```export PATH="追加したいパス:追加したいパス:追加したいパス:$PATH"```  
 
   使用例  
-　export PATH="/Applications/Tools/AdoptOpenJDK/openlogic-openjdk-11.0.25+9-mac-x64/jdk-11.0.25.jdk/Contents/Home/bin:/Applications/Tools/PostgreSQL/13/bin:/Applications/Tools/apache-maven-3.9.9/bin:$PATH"  
+　```export PATH="/Applications/Tools/AdoptOpenJDK/openlogic-openjdk-11.0.25+9-mac-x64/jdk-11.0.25.jdk/Contents/Home/bin:/Applications/Tools/PostgreSQL/13/bin:/Applications/Tools/apache-maven-3.9.9/bin:$PATH"```  
   
    ※ 今回のように複数のパスを登録したい場合は、一つ目のパスの後に「:(コロン)」を記述し、その後に2つ目、３つ目のパスを記述する。  
      
@@ -97,13 +99,64 @@ https://maven.apache.org/download.cgi
 ※今回は/Toolsディレクトリ下に作成することを前提としている。  
   
 1)コマンドプロンプト(macはターミナル)でToolsディレクトリに移動する。  
- cd ~/.....Tools
+ ```cd ~/.....Tools```
 
 2)Maven Archetype Plugin の mvn archetype:generate を利用して、プロジェクトを作成する。  
 
   コマンド   
-  ```bash
+  ```
   mvn archetype:generate -DarchetypeGroupId=com.github.macchinetta.blank -DarchetypeArtifactId=macchinetta-batch-archetype -DarchetypeVersion=2.3.0.RELEASE
 ```
+3)以下の内容を対話式で入力する  
+ 項目名         設定例  
+groupId : com.example.batch  
+artifactId : macchinetta-batch-tutorial  
+version : 1.0.0-SNAPSHOT  
+package : com.example.batch.tutorial  
+
+4)Enterで「BUILD SUCCESS」が出ることを確認する。  
+```bash
+C:\xxx>mvn archetype:generate -DarchetypeGroupId=com.github.macchinetta.blank -DarchetypeArtifactId=macchinetta-batch-archetype -DarchetypeVersion=2.3.0.RELEASE
+[INFO] Scanning for projects&#8230;&#8203;
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+(.. omitted)
+  Define value for property 'groupId': com.example.batch
+  Define value for property 'artifactId': macchinetta-batch-tutorial
+  Define value for property 'version' 1.0-SNAPSHOT: : 1.0.0-SNAPSHOT
+  Define value for property 'package' com.example.batch: : com.example.batch.tutorial
+  Confirm properties configuration:
+  groupId: com.example.batch
+  artifactId: macchinetta-batch-tutorial
+  version: 1.0.0-SNAPSHOT
+  package: com.example.batch.tutorial
+   Y: : y
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: macchinetta-
+  batch-archetype:2.3.0.RELEASE
+[INFO] ----------------------------------------------------------------------------
+  [INFO] Parameter: groupId, Value: com.example.batch
+  [INFO] Parameter: artifactId, Value: macchinetta-batch-tutorial
+  [INFO] Parameter: version, Value: 1.0.0-SNAPSHOT
+  [INFO] Parameter: package, Value: com.example.batch.tutorial
+  [INFO] Parameter: packageInPathFormat, Value: com/example/batch/tutorial
+  [INFO] Parameter: package, Value: com.example.batch.tutorial
+  [INFO] Parameter: groupId, Value: com.example.batch
+  [INFO] Parameter: artifactId, Value: macchinetta-batch-tutorial
+  [INFO] Parameter: version, Value: 1.0.0-SNAPSHOT
+  [INFO] Project created from Archetype in dir: C:\xxx\macchinetta-batch-tutorial
+  [INFO] ------------------------------------------------------------------------
+  [INFO] BUILD SUCCESS
+  [INFO] ------------------------------------------------------------------------
+  [INFO] Total time: 45.293 s
+  [INFO] Finished at: 2020-03-04T16:48:55+09:00
+  [INFO] Final Memory: 16M/197M
+  [INFO] ------------------------------------------------------------------------
+```
+
+
+
 
   
