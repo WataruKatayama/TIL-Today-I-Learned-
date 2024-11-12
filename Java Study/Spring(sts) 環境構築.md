@@ -93,4 +93,16 @@ https://maven.apache.org/download.cgi
 7)env または　printenvで環境変数が追加されているか確認する。  
 
 ### ③メイブンコマンドでプロジェクトを作成する。  
+※今回は/Toolsディレクトリ下に作成することを前提としている。  
+  
+1)コマンドプロンプト(macはターミナル)でToolsディレクトリに移動する。  
+　cd ~/.....Tools  
 
+2)Maven Archetype Plugin の mvn archetype:generate を利用して、プロジェクトを作成する。  
+
+  コマンド   
+  ```bash
+  mvn archetype:generate -DarchetypeGroupId=com.github.macchinetta.blank -DarchetypeArtifactId=macchinetta-batch-archetype -DarchetypeVersion=2.3.0.RELEASE
+```
+
+  
