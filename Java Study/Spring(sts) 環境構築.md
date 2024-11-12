@@ -81,7 +81,7 @@ https://maven.apache.org/download.cgi
 5)open .zshrc コマンドで.zshrcファイル自体を開く  
 　※.zshrcファイルのウィンドウが開かれることを確認する。  
    
-6).zshrcファイルのウィンドウの中に直接下記のコマンドを記述し、環境変数のパスを登録する。  
+6).zshrcファイルのウィンドウの中に直接下記のコマンドを記述し、環境変数のパスを登録する。(/binまでのパスを記述する)  
 
   　export PATH="追加したいパス:追加したいパス:追加したいパス:$PATH"  
 
@@ -89,4 +89,8 @@ https://maven.apache.org/download.cgi
 　export PATH="/Applications/Tools/AdoptOpenJDK/openlogic-openjdk-11.0.25+9-mac-x64/jdk-11.0.25.jdk/Contents/Home/bin:/Applications/Tools/PostgreSQL/13/bin:/Applications/Tools/apache-maven-3.9.9/bin:$PATH"  
   
    ※ 今回のように複数のパスを登録したい場合は、一つ目のパスの後に「:(コロン)」を記述し、その後に2つ目、３つ目のパスを記述する。  
-   
+     
+7)env または　printenvで環境変数が追加されているか確認する。  
+
+### ③メイブンコマンドでプロジェクトを作成する。  
+
