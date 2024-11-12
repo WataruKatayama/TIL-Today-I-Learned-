@@ -96,7 +96,7 @@ https://maven.apache.org/download.cgi
 ※今回は/Toolsディレクトリ下に作成することを前提としている。  
   
 1)コマンドプロンプト(macはターミナル)でToolsディレクトリに移動する。  
-　cd ~/.....Tools  
+ cd ~/.....Tools
 
 2)Maven Archetype Plugin の mvn archetype:generate を利用して、プロジェクトを作成する。  
 
