@@ -74,9 +74,7 @@ https://maven.apache.org/download.cgi
 　※もしコマンド無効のコメントが返ってきた場合は、PATHをリセットする必要があるので、以下のコマンド操作を行う。  
  　　 環境変数のパス　リセットコマンド  
 　　　ターミナルで以下のコマンドをそのままコピペ  
-     ```bash
-　　　export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin  
-   ```
+     ```bash export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin  ```
 
 
 　　　ls -a でファイル一覧が表示されるか確認する。  
@@ -86,7 +84,7 @@ https://maven.apache.org/download.cgi
    
 6).zshrcファイルのウィンドウの中に直接下記のコマンドを記述し、環境変数のパスを登録する。(/binまでのパスを記述する)  
 
-  　export PATH="追加したいパス:追加したいパス:追加したいパス:$PATH"  
+  　```bash export PATH="追加したいパス:追加したいパス:追加したいパス:$PATH"  ```
 
   使用例  
 　export PATH="/Applications/Tools/AdoptOpenJDK/openlogic-openjdk-11.0.25+9-mac-x64/jdk-11.0.25.jdk/Contents/Home/bin:/Applications/Tools/PostgreSQL/13/bin:/Applications/Tools/apache-maven-3.9.9/bin:$PATH"  
