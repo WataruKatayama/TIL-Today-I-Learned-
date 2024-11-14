@@ -169,7 +169,23 @@ cd macchinetta-batch-tutorial
   mvn clean dependency:copy-dependencies -DoutputDirectory=lib package
   ```
 
-7)///
+7)正しくプロジェクトが作成されたかどうか、サンプルのジョブを実行してみる。  
+  ※今回は、javaのcp(クラスパス)コマンドでクラスパス（ライブラリやクラスファイルを検索する場所）を指定して、必要な処理を読み込み、実行するコマンドを使用してみる。      
+  windowsの場合  
+  ```bash
+  java -cp "lib/*;target/*" org.springframework.batch.core.launch.support.CommandLineJobRunner META-INF/jobs/job01.xml job01
+  ```
+
+  macまたはlinuxの場合  
+  ```bash
+  java -cp 'lib/*:target/*' org.springframework.batch.core.launch.support.CommandLineJobRunner META-INF/jobs/job01.xml job01
+  ```
+
+8)実行結果に　「status: [COMPLETED] in　~~~ms」が表示されていれば成功。  
+
+
+###プロジェクトのインポート  
+
 
 
 
