@@ -184,7 +184,7 @@ cd macchinetta-batch-tutorial
 8)実行結果に　「status: [COMPLETED] in　~~~ms」が表示されていれば成功。  
 
 
-###プロジェクトのインポート  
+### ④プロジェクトをインポートする  
 
 
 
