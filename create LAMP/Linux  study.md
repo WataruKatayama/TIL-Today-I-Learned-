@@ -12,7 +12,7 @@ rm: 'original_dir/' を削除できません: ディレクトリです　←　-
 [ec2-user@ip-172-31-15-116 ~]$ rm -r copied_dir/  
 
 
-ディレクトリとファイル  
+ディレクトリとファイルの区別  
 [ec2-user@ip-172-31-15-116 ~]$ touch myfile ←ファイルの作成  
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 myfile  
