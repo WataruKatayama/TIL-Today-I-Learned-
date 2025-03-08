@@ -31,3 +31,19 @@ cpied.txt  original.txt
 [ec2-user@ip-172-31-15-116 ~]$ rm cpied.txt original.txt ←スペース区切りで複数削除可能   
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 [ec2-user@ip-172-31-15-116 ~]$   
+
+
+[ec2-user@ip-172-31-15-116 ~]$ touch sample.txt  
+[ec2-user@ip-172-31-15-116 ~]$ ls  
+sample.txt  
+[ec2-user@ip-172-31-15-116 ~]$ mv sample.txt renamed.txt  
+[ec2-user@ip-172-31-15-116 ~]$ ls  
+renamed.txt  
+[ec2-user@ip-172-31-15-116 ~]$ mkdir mydir  
+[ec2-user@ip-172-31-15-116 ~]$ ls  
+mydir  renamed.txt  
+[ec2-user@ip-172-31-15-116 ~]$ mv renamed.txt mydir/renamed2.txt  
+[ec2-user@ip-172-31-15-116 ~]$ ls  
+mydir  
+[ec2-user@ip-172-31-15-116 ~]$ ls mydir/  
+renamed2.txt  
