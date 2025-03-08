@@ -36,13 +36,13 @@ cpied.txt  original.txt
 [ec2-user@ip-172-31-15-116 ~]$ touch sample.txt  
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 sample.txt  
-[ec2-user@ip-172-31-15-116 ~]$ mv sample.txt renamed.txt  
+[ec2-user@ip-172-31-15-116 ~]$ mv sample.txt renamed.txt ←mvにはリネームの機能もある  
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 renamed.txt  
 [ec2-user@ip-172-31-15-116 ~]$ mkdir mydir  
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 mydir  renamed.txt  
-[ec2-user@ip-172-31-15-116 ~]$ mv renamed.txt mydir/renamed2.txt  
+[ec2-user@ip-172-31-15-116 ~]$ mv renamed.txt mydir/renamed2.txt　←移動のついでにリネームしても問題ない  
 [ec2-user@ip-172-31-15-116 ~]$ ls  
 mydir  
 [ec2-user@ip-172-31-15-116 ~]$ ls mydir/  
