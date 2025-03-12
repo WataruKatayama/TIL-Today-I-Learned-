@@ -91,4 +91,12 @@ katayama:x:1001:1001::/home/katayama:/bin/bash ←　最後の行に追加設定
   
   
 [ec2-user@ip-172-31-15-116 ~]$ ls /home/ ←ユーザを追加するとホームディレクトリもユーザー用のものも追加される
-ec2-user  katayama
+ec2-user  katayama  
+  
+ユーザのパスワード付与  
+[ec2-user@ip-172-31-15-116 ~]$ sudo passwd katayama  
+ユーザー katayama のパスワードを変更。  
+新しい パスワード:  
+新しい パスワードを再入力してください:  
+passwd: すべての認証トークンが正しく更新できました。    
+  
