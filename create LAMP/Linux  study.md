@@ -100,3 +100,53 @@ ec2-user  katayama
 新しい パスワードを再入力してください:  
 passwd: すべての認証トークンが正しく更新できました。    
   
+ユーザの切り替え  
+[ec2-user@ip-172-31-15-116 ~]$ su - katayama ←　su(スイッチユーザ)コマンドを使用する。　-をつけて実行すると対象のホームディレクトリに移動する。-をつけないと現在のディレクトリのままユーザを変更する処理になる。  
+パスワード:  
+[katayama@ip-172-31-15-116 ~]$ ←ec2-user@からkatayama@に変更できていることが確認できる。  
+[katayama@ip-172-31-15-116 ~]$ exit ←exitコマンドでログアウトとなる。  
+ログアウト  
+[ec2-user@ip-172-31-15-116 ~]$ ←katayama@からec2-user@に変更できていることが確認できる。  
+  
+ユーザの削除  ※削除すると二度と復旧できないので注意 ※管理者権限が必要なのでsudoを使用すること  
+[ec2-user@ip-172-31-15-116 ~]$ ls /home/   
+ec2-user  katayama  
+[ec2-user@ip-172-31-15-116 ~]$ sudo userdel -r katayama　←-rをつけると削除するユーザのホームディレクトリも一緒に削除する。  
+[ec2-user@ip-172-31-15-116 ~]$ ls /home/  
+ec2-user  
+[ec2-user@ip-172-31-15-116 ~]$   
+  
+  
+管理者権限ユーザ(sudoユーザ)の作成　※前提として管理者権限が使用できるユーザで操作を行うこと  
+  
+[ec2-user@ip-172-31-15-116 ~]$ sudo useradd katayama　←ユーザの追加  
+[ec2-user@ip-172-31-15-116 ~]$ sudo passwd katayama　←ユーザにパスワード付与  
+ユーザー katayama のパスワードを変更。  
+新しい パスワード:  
+新しい パスワードを再入力してください:  
+passwd: すべての認証トークンが正しく更新できました。  
+  
+ここから手順  
+1⃣権限を持つグループにユーザを追加する  
+[ec2-user@ip-172-31-15-116 ~]$ sudo usermod -aG wheel katayama  
+wheel：管理者権限を実行できるグループにユーザを追加するコマンド  
+usermod：ユーザをグループに追加するコマンド  
+-aG：ユーザに対して追加でグループを指定するという意味のオプション  
+  
+2⃣viエディタを使ってsudoersファイルを編集する  
+sudoersファイル　←どのユーザがrootユーザとしてシステムにアクセス、コマンド実行できるかを設定するファイル  
+  
+[ec2-user@ip-172-31-15-116 ~]$ sudo vim /etc/sudoers ←sudoersファイル編集の場合、これでは読み取り専用のコマンドになるので注意  
+[ec2-user@ip-172-31-15-116 ~]$ sudo EDITOR=vim visudo ←vim visudoコマンドで編集が可能になる  
+※EDITOR=vim ←Amazon Linux 2023ではこのようにエディタにvimを使うことを明示的に指定しないと、「nano」というエディタが起動してしまう  
+  
+3⃣エディタが開けたら、/Allow rootで「  root    ALL=(ALL)       ALL　」を探し出す  
+  
+4⃣iキーで挿入モードに変更し、 root    ALL=(ALL)       ALL　の下に下記を追記する  
+katayama ALL=(ALL) ALL ←katayamaというユーザにsudoの権限を定義している。(katayamaはどのマシンからでも任意のユーザ、グループとしてsudoを実行できる)  
+  
+5⃣escキーでノーマルモードに戻り、:wqでエディタを終了する。  
+  
+[ec2-user@ip-172-31-15-116 ~]$ su - katayama  
+パスワード:  
+[katayama@ip-172-31-15-116 ~]$ ←$になっていれば管理者権限が付与されている意味になる。  
