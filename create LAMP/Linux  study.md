@@ -116,6 +116,9 @@ ec2-user  katayama
 ec2-user  
 [ec2-user@ip-172-31-15-116 ~]$   
   
+管理者権限のないユーザが権限が必要なコマンドを実行した場合どうなるか  
+[katayama@ip-172-31-15-116 ~]$ adduser test-user  
+adduser: Permission denied. ←管理者権限がないと返されてしまう  
   
 管理者権限ユーザ(sudoユーザ)の作成　※前提として管理者権限が使用できるユーザで操作を行うこと  
   
