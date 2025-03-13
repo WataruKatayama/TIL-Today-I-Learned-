@@ -22,7 +22,7 @@ mydir  myfile
 [ec2-user@ip-172-31-15-116 ~]$ ls -l　←詳細を見るオプション  
 合計 0  
 drwxr-xr-x. 2 ec2-user ec2-user 6  3月  5 03:37 mydir ← パーミッションアクセス権の先頭にdがあればディレクトリ 
--rw-r--r--. 1 ec2-user ec2-user 0  3月  5 03:37 myfile  
+-rw-r--r--. 1 ec2-user ec2-user 0  3月  5 03:37 myfile ←先頭 -はファイル、lはシンボリックリンク  
   
 [ec2-user@ip-172-31-15-116 ~]$ touch original.txt  
 [ec2-user@ip-172-31-15-116 ~]$ cp original.txt cpied.txt  
@@ -192,3 +192,32 @@ sample.txt
   
 コマンド履歴の削除←ヒストリーに間違えてパスワードなどが残ってしまった時などに使用  
 history -d ヒストリーの番号  
+
+コマンドの格納場所をフルパスで表示させる　←パスが通っていなくてコマンドを実行できないときの手がかりの一つになる  
+[ec2-user@ip-172-31-15-116 ~]$ which ls  
+alias ls='ls --color=auto'  
+        /usr/bin/ls ←このパスにlsコマンドの情報ファイルが格納されている  
+  
+※フルパス　/usr/bin/ls　を入力すれば　ls　コマンドを入力したことになる  
+[ec2-user@ip-172-31-15-116 ~]$ /usr/bin/ls  
+sample.txt  
+  
+ファイル、ディレクトリの権限を変更する　←chmodを使用  
+[ec2-user@ip-172-31-15-116 ~]$ touch testfile  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt  
+-rw-r--r--. 1 ec2-user ec2-user   0  3月 14 02:09 testfile  ←作成したtestfileは所有者に読書き、グループその他には読取り権限のみ  
+[ec2-user@ip-172-31-15-116 ~]$ chmod 400 testfile　←chmodで権限を変更できる　所有者・グループ・その他の順で数字を配列させる   
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt  
+-r--------. 1 ec2-user ec2-user   0  3月 14 02:09 testfile　←所有者のみ権限があり、その権限も読み取りのみとなった  
+  
+[ec2-user@ip-172-31-15-116 ~]$ chmod 600 testfile ←所有者にのみ読み書きの権限を付与  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt  
+-rw-------. 1 ec2-user ec2-user   0  3月 14 02:09 testfile　←先ほどは読取りのみだったが書き込みも付与されている  
+  
+[ec2-user@ip-172-31-15-116 ~]$    
