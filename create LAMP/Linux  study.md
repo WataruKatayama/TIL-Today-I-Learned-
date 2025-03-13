@@ -241,6 +241,56 @@ drwxr-xr-x. 2 ec2-user ec2-user  22  3月 14 02:37 testdir　←ディレクト�
 [ec2-user@ip-172-31-15-116 ~]$ sudo chown -R katayama:katayama testdir/　←ディレクトリ配下ごと変えたい場合は-Rを使用する  
 [ec2-user@ip-172-31-15-116 ~]$ ls -l testdir/  
 合計 0  
--rw-r--r--. 1 katayama katayama 0  3月 14 02:37 testfile ←配下ファイルの所有者、所有グループはkatayamaになった     
-
+-rw-r--r--. 1 katayama katayama 0  3月 14 02:37 testfile ←配下ファイルの所有者、所有グループはkatayamaになった  
   
+所有グループの一覧  
+[ec2-user@ip-172-31-15-116 ~]$ cat /etc/group　←ここにグループ一覧が格納されている  
+root:x:0:  
+bin:x:1:  
+daemon:x:2:  
+sys:x:3:  
+adm:x:4:ec2-user  
+|  
+|  
+↓  
+ec2-user:x:1000:   
+katayama:x:1001: ←xは現在は使用されていない　1001はGID  
+  
+グループの情報確認  
+[ec2-user@ip-172-31-15-116 ~]$ groups katayama ←グループ確認コマンド   
+katayama : katayama wheel ←意味　ユーザkatayamaはkatayamaというグループとwheelという2つのグループに属している  
+※所有者と同じ名前のグループはユーザ作成時に自動で咲く際される　wheelは特権を持つユーザのグループ  
+  
+[ec2-user@ip-172-31-15-116 ~]$ id katayama　←idコマンドでも確認できる  
+uid=1001(katayama) gid=1001(katayama) groups=1001(katayama),10(wheel)  
+  
+グループの作成  
+[ec2-user@ip-172-31-15-116 ~]$ sudo groupadd devgroup  
+[ec2-user@ip-172-31-15-116 ~]$ cat /etc/group  
+root:x:0:  
+bin:x:1:  
+daemon:x:2:  
+sys:x:3:  
+adm:x:4:ec2-user  
+|  
+|  
+↓  
+ec2-user:x:1000:   
+katayama:x:1001:  
+devgroup:x:1002:　←新規でdevgroupが追加された  
+  
+別のグループのユーザを他のグループに追加  
+[ec2-user@ip-172-31-15-116 ~]$ sudo usermod -aG devgroup katayama ←134行目と同じ。aを抜くと追加ではなく上書きになってしまう。  
+[ec2-user@ip-172-31-15-116 ~]$ groups katayama  
+katayama : katayama wheel devgroup　←所属にdevgroupが追加された  
+  
+グループからユーザを削除  
+[ec2-user@ip-172-31-15-116 ~]$ sudo gpasswd -d katayama devgroup  
+ユーザ katayama をグループ devgroup から削除  
+[ec2-user@ip-172-31-15-116 ~]$ groups katayama  
+katayama : katayama wheel　←devgroupが削除された  
+  
+グループ自体の削除  
+[ec2-user@ip-172-31-15-116 ~]$ sudo groupdel devgroup  
+[ec2-user@ip-172-31-15-116 ~]$ cat /etc/group | grep devgroup　←これで絞込検索しながらグループ一覧を表示できる  
+[ec2-user@ip-172-31-15-116 ~]$ ←なにも表示されないので削除されたということ  
