@@ -153,3 +153,42 @@ katayama ALL=(ALL) ALL ←katayamaというユーザにsudoの権限を定義し
 [ec2-user@ip-172-31-15-116 ~]$ su - katayama  
 パスワード:  
 [katayama@ip-172-31-15-116 ~]$ ←$になっていれば管理者権限が付与されている意味になる。  
+  
+コマンドの履歴  
+[ec2-user@ip-172-31-15-116 ~]$ history  
+    1  sudo localectl set-locale LANG=ja_JP.UTF-8  
+    2  exit  
+    3  date  
+    4  sudo timedatectl set-timezone Asia/Tokyo  
+    5  date  
+    6  pwd  
+    7  clear   
+    8  pwd  
+    9  mkdir lesson  
+   10  ls  
+  
+ ヒストリーの番号からコマンドを実行  
+ [ec2-user@ip-172-31-15-116 ~]$ !10 ←!の後に番号をつけるとそのコマンドが実行される  
+ls  
+sample.txt  
+  
+キーワードでヒストリー検索  
+[ec2-user@ip-172-31-15-116 ~]$ history | grep pwd ←grepでキーワード検索。これで過去に実行したpwdのみを抽出する。  
+    6  pwd  
+    8  pwd  
+   15  pwd  
+   19  pwd  
+   21  pwd  
+   23  pwd  
+   25  pwd  
+   31  pwd  
+   34  pwd  
+   39  pwd  
+   45  pwd  
+   49  pwd  
+   65  pwd  
+  142  history | grep pwd  
+[ec2-user@ip-172-31-15-116 ~]$  
+  
+コマンド履歴の削除←ヒストリーに間違えてパスワードなどが残ってしまった時などに使用  
+history -d ヒストリーの番号  
