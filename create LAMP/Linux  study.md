@@ -220,4 +220,27 @@ sample.txt
 -rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt  
 -rw-------. 1 ec2-user ec2-user   0  3月 14 02:09 testfile　←先ほどは読取りのみだったが書き込みも付与されている  
   
-[ec2-user@ip-172-31-15-116 ~]$    
+ファイル、ディレクトリの所有者、所有グループを変更する　←chownを使用  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt　←現所有者、所有グループはec2-userとなっている  
+[ec2-user@ip-172-31-15-116 ~]$ sudo chown katayama:katayama sample.txt ←chownのあとは所有者：所有グループの順で設定  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 katayama katayama 131  3月 10 04:49 sample.txt　←所有者、所有グループがkatayamaになっていることが確認できる  
+
+[ec2-user@ip-172-31-15-116 ~]$ mkdir testdir/  
+[ec2-user@ip-172-31-15-116 ~]$ touch testdir/testfile  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l  
+合計 4  
+-rw-r--r--. 1 ec2-user ec2-user 131  3月 10 04:49 sample.txt  
+drwxr-xr-x. 2 ec2-user ec2-user  22  3月 14 02:37 testdir　←ディレクトリの所有者、所有グループはec2-user  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l testdir/  
+合計 0  
+-rw-r--r--. 1 ec2-user ec2-user 0  3月 14 02:37 testfile　←ファイルの所有者、所有グループはec2-user  
+[ec2-user@ip-172-31-15-116 ~]$ sudo chown -R katayama:katayama testdir/　←ディレクトリ配下ごと変えたい場合は-Rを使用する  
+[ec2-user@ip-172-31-15-116 ~]$ ls -l testdir/  
+合計 0  
+-rw-r--r--. 1 katayama katayama 0  3月 14 02:37 testfile ←配下ファイルの所有者、所有グループはkatayamaになった     
+
+  
