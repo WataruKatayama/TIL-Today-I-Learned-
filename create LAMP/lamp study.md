@@ -6,6 +6,7 @@ Nothing to do.
 Complete!　コンプリートが出ればOK  
   
 [ec2-user@ip-172-31-33-39 ~]$ sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel  
+  
 httpd:webサーバ　Apache  
 wget: ネットワークからデータをダウンロードするためのパッケージ  
 php-fpm: fastCGI Process Managerの略。ウェブサーバでPHPを効率よく実行するためのもの。  
@@ -54,3 +55,17 @@ Mar 16 12:40:40 ip-172-31-33-39.ap-northeast-1.compute.internal systemd[1]: Star
 Mar 16 12:40:40 ip-172-31-33-39.ap-northeast-1.compute.internal systemd[1]: Started httpd.service - Th>  
 Mar 16 12:40:40 ip-172-31-33-39.ap-northeast-1.compute.internal httpd[31113]: Server configured, liste>  
 lines 1-21/21 (END)  
+最後に:qで終了  
+
+システムブート(起動)するたびにApacheウェブサーバが自動起動するようにする　←Linuxを起動するたびにApacheを自動で起動するということ  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl enable httpd  
+Created symlink /etc/systemd/system/multi-user.target.wants/httpd.service → /usr/lib/systemd/system/httpd.service.  
+[ec2-user@ip-172-31-33-39 ~]$  
+一度、サーバを停止、再起動をして自動起動することを確認  
+→sudo systemctl status httpdコマンドでActiveステータスがactive (running)になっていればOK  
+  
+以下のコマンドでも自動起動しているか確認できる  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl is-enabled httpd  
+enabled　←enabledが出れば自動起動が有効になっているということ  
+  
+  
