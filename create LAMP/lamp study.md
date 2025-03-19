@@ -99,4 +99,42 @@ drwxr-xr-x. 2 root root 6 Jul 30  2024 html　←このように/var/www/htmlデ
 [ec2-user@ip-172-31-33-39 ~]$ touch  /var/www/html/index.html  
 touch: cannot touch '/var/www/html/index.html': Permission denied　←権限がないと作成できない  
   
+このままではwebページが作成できないので権限を付与する（ついでにapacheグループにも権限を付与する)  
+1⃣現在のユーザをapacheグループに加える(グループはapacheインストール時にすでに作成されている)  
+[ec2-user@ip-172-31-33-39 ~]$ sudo usermod -aG apache ec2-user  
+[ec2-user@ip-172-31-33-39 ~]$ groups  
+ec2-user adm wheel apache systemd-journal  
+[ec2-user@ip-172-31-33-39 ~]$ sudo chown -R ec2-user:apache /var/www/　←/var/www配下を所有ユーザec2-user、所有グループapacheに権限変更するように設定  
+[ec2-user@ip-172-31-33-39 ~]$ ls -l /var/www/  
+total 0  
+drwxr-xr-x. 2 ec2-user apache 6 Jul 30  2024 cgi-bin  
+drwxr-xr-x. 2 ec2-user apache 6 Jul 30  2024 html  
   
+2⃣グループに対する書き込み権限を付与させる  
+[ec2-user@ip-172-31-33-39 ~]$ sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;  
+※コマンドの内容の要約  
+ルートユーザとして/var/wwwディレクトリとその配下にあるすべてのサブディレクトリのパーミッションを変更し、  
+所有者は読書き実行の権限、グループとその他のユーザは読取りと実行のみの権限を持つようにする。  
+更に、新しく作られるファイルやディレクトリは元のディレクトリと同じグループ所有権を持つようにする。 
+-----------------------------------  
+chmod:パーミッション変更コマンド  
+2775:権限の前に2を設定すると、ディレクトリ内で新規作成されたファイルやディレクトリは元のディレクトリと同じグループ所有権を持つようになる  
+-exec:findで検索したファイルに対してコマンドを実行するオプション(ここではsudo chmod 2775)  
+{}:findコマンドで検索された各ディレクトリを対象にするという意味  
+-----------------------------------  
+  
+[ec2-user@ip-172-31-33-39 ~]$ find /var/www -type f -exec sudo chmod 0664 {} \;  
+※コマンドの内容の要約  
+ルートユーザとして/var/wwwディレクトリとその配下にあるすべてのサブディレクトリの中で "ファイルに対して" パーミッションを変更し、  
+所有者とグループは読書きのみの権限、グループとその他のユーザは読取りのみの権限を持つようにする。   
+  
+実行前  
+[ec2-user@ip-172-31-33-39 ~]$ ls -l /var/www/  
+total 0  
+drwxr-xr-x. 2 root root 6 Jul 30  2024 cgi-bin  
+drwxr-xr-x. 2 root root 6 Jul 30  2024 html  
+実行後  
+[ec2-user@ip-172-31-33-39 ~]$ ls -l /var/www/  
+total 0  
+drwxrwsr-x. 2 ec2-user apache 6 Jul 30  2024 cgi-bin　←実行前と比較するとグループパーミッションの実行がxからsになっている  
+drwxrwsr-x. 2 ec2-user apache 6 Jul 30  2024 html　　　これはchmod設定時、権限の前に2を設定したから  
