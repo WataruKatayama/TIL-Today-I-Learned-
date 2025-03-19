@@ -96,4 +96,7 @@ drwxr-xr-x. 2 root root 6 Jul 30  2024 cgi-bin
 drwxr-xr-x. 2 root root 6 Jul 30  2024 html　←このように/var/www/htmlディレクトリにドキュメントルートが格納されていることが確認できる  
 ※ドキュメントルート：Webサイトで公開されるHTMLファイルや画像データなどが格納される場所  
   
+[ec2-user@ip-172-31-33-39 ~]$ touch  /var/www/html/index.html  
+touch: cannot touch '/var/www/html/index.html': Permission denied　←権限がないと作成できない  
+  
   
