@@ -138,3 +138,6 @@ drwxr-xr-x. 2 root root 6 Jul 30  2024 html
 total 0  
 drwxrwsr-x. 2 ec2-user apache 6 Jul 30  2024 cgi-bin　←実行前と比較するとグループパーミッションの実行がxからsになっている  
 drwxrwsr-x. 2 ec2-user apache 6 Jul 30  2024 html　　　これはchmod設定時、権限の前に2を設定したから  
+
+[ec2-user@ip-172-31-33-39 ~]$ touch /var/www/index.html  
+[ec2-user@ip-172-31-33-39 ~]$ 　　　　　　　　　　　　　　　←メッセージが出ることなく無事に作成できた  
