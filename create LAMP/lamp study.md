@@ -141,3 +141,18 @@ drwxrwsr-x. 2 ec2-user apache 6 Jul 30  2024 html　　　これはchmod設定�
 
 [ec2-user@ip-172-31-33-39 ~]$ touch /var/www/index.html  
 [ec2-user@ip-172-31-33-39 ~]$ 　　　　　　　　　　　　　　　←メッセージが出ることなく無事に作成できた  
+  
+これにより、ドキュメントルートを編集できるようになる。  
+  
+PHP動作確認  
+1⃣phpinfoページを作成しPHPの動作を確認する。ブラウザ上でphpinfoページを表示させる。  
+→新規PHPファイルを作成することでLAMPサーバが正常に動作するかをテストする  
+  
+[ec2-user@ip-172-31-33-39 ~]$ echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php ←phpinfoファイルをドキュメントルートに作成しつつ、その中にphpの情報を表示させる関数を記述する  
+[ec2-user@ip-172-31-33-39 ~]$ 　←何も表示されなければOK  
+" ":echoで内容を記述する際に囲み記号として必要  
+<? ?>:PHP関数を記述する際に囲み記号として必要  
+phpinfo();:PHPの設定情報を表示させる関数  
+  
+  
+  
