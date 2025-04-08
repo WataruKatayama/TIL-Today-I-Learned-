@@ -172,7 +172,7 @@ phpinfo();:PHPの設定情報を表示させる関数
 ※ブラウザでアドレスの後に/index.phpで実際の表示も確認できる  
   
 SQLのインストール、動作確認（MySQLの互換であるMariaDBをインストール）  
-1⃣インストール
+1⃣インストール  
 [ec2-user@ip-172-31-33-39 ~]$ sudo dnf install mariadb105-server -y  
 Installed:  
   mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64                                                     
@@ -282,3 +282,9 @@ Thanks for using MariaDB!
      Loaded: loaded (/usr/lib/systemd/system/mariadb.service; disabled; preset: disabled)  
      Active: active (running) since Tue 2025-04-08 18:06:37 UTC; 22min ago ←active (running)と出ていればOK　qキーで終了  
      
+3⃣システムブート(起動)するたびにMariaDBが自動起動するようにする  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl enable mariadb  
+Created symlink /etc/systemd/system/mysql.service → /usr/lib/systemd/system/mariadb.service.    
+Created symlink /etc/systemd/system/mysqld.service → /usr/lib/systemd/system/mariadb.service.  
+Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → /usr/lib/systemd/system/mariadb.service.  
+[ec2-user@ip-172-31-33-39 ~]$ exit ←一度ログアウトしてsystemctl statusで起動しているか確認  
