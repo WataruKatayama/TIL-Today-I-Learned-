@@ -170,5 +170,28 @@ phpinfo();:PHPの設定情報を表示させる関数
 [ec2-user@ip-172-31-33-39 ~]$ cat /var/www/html/index.php　←catコマンドでも中身を確認できる  
 <?php echo 'Hello World'; ?>  
 ※ブラウザでアドレスの後に/index.phpで実際の表示も確認できる  
-
   
+SQLのインストール（MySQLの互換であるMariaDBをインストール）  
+[ec2-user@ip-172-31-33-39 ~]$ sudo dnf install mariadb105-server -y  
+Installed:  
+  mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64                                                     
+  mariadb-connector-c-config-3.1.13-1.amzn2023.0.3.noarch                                              
+  mariadb105-3:10.5.25-1.amzn2023.0.1.x86_64                                                           
+  mariadb105-backup-3:10.5.25-1.amzn2023.0.1.x86_64                                                    
+  mariadb105-common-3:10.5.25-1.amzn2023.0.1.x86_64                                                    
+  mariadb105-cracklib-password-check-3:10.5.25-1.amzn2023.0.1.x86_64                                   
+  mariadb105-errmsg-3:10.5.25-1.amzn2023.0.1.x86_64                                                    
+  mariadb105-gssapi-server-3:10.5.25-1.amzn2023.0.1.x86_64                                             
+  mariadb105-server-3:10.5.25-1.amzn2023.0.1.x86_64                                                    
+  mariadb105-server-utils-3:10.5.25-1.amzn2023.0.1.x86_64                                              
+  mysql-selinux-1.0.4-2.amzn2023.0.3.noarch                                                            
+  perl-DBD-MariaDB-1.22-1.amzn2023.0.4.x86_64                                                          
+  perl-DBI-1.643-7.amzn2023.0.3.x86_64                                                                 
+  perl-FileHandle-2.03-477.amzn2023.0.6.noarch                                                         
+  perl-Math-BigInt-1:1.9998.39-2.amzn2023.0.2.noarch                                                   
+  perl-Math-BigRat-0.2614-458.amzn2023.0.2.noarch                                                      
+  perl-Math-Complex-1.59-477.amzn2023.0.6.noarch                                                       
+  perl-Sys-Hostname-1.23-477.amzn2023.0.6.x86_64                                                       
+  perl-base-2.27-477.amzn2023.0.6.noarch                                                               
+
+Complete!  
