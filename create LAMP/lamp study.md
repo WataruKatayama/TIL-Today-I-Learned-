@@ -171,7 +171,8 @@ phpinfo();:PHPの設定情報を表示させる関数
 <?php echo 'Hello World'; ?>  
 ※ブラウザでアドレスの後に/index.phpで実際の表示も確認できる  
   
-SQLのインストール（MySQLの互換であるMariaDBをインストール）  
+SQLのインストール、動作確認（MySQLの互換であるMariaDBをインストール）  
+1⃣インストール
 [ec2-user@ip-172-31-33-39 ~]$ sudo dnf install mariadb105-server -y  
 Installed:  
   mariadb-connector-c-3.1.13-1.amzn2023.0.3.x86_64                                                     
@@ -195,3 +196,89 @@ Installed:
   perl-base-2.27-477.amzn2023.0.6.noarch                                                               
 
 Complete!  
+上記のように　Complete!　がでればOK  
+  
+2⃣DBサーバを起動、初期設定をする  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl start mariadb  
+[ec2-user@ip-172-31-33-39 ~]$  ←何もでなければOK  
+[ec2-user@ip-172-31-33-39 ~]$ sudo mysql_secure_installation ←対話形式でパスワード設定をするコマンド  
+  
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB  
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!  
+  
+In order to log into MariaDB to secure it, we'll need the current  
+password for the root user. If you've just installed MariaDB, and  
+haven't set the root password yet, you should just press enter here.  
+  
+Enter current password for root (enter for none):  ←現在のMariaDBのルートパスワードを入力する(デフォはルートパスワードは設定されていないので入力せずにEnterキー)  
+
+OK, successfully used password, moving on...  
+  
+Setting the root password or using the unix_socket ensures that nobody  
+can log into the MariaDB root user without the proper authorisation.  
+  
+You already have your root account protected, so you can safely answer 'n'.  
+  
+Switch to unix_socket authentication [Y/n]  Y　←Unixソケット認証に切り替えるかどうかを設定  
+  
+Enabled successfully!  
+Reloading privilege tables..  
+ ... Success!  
+  
+  
+You already have your root account protected, so you can safely answer 'n'.  
+  
+Change the root password? [Y/n] ←MariaDBのルートパスワードを変更するか設定  
+New password:  ←パスワードを設定  
+Re-enter new password: 　←再度設定したパスワードを入力  
+Password updated successfully!  
+Reloading privilege tables..  
+ ... Success!  
+  
+  
+By default, a MariaDB installation has an anonymous user, allowing anyone  
+to log into MariaDB without having to have a user account created for  
+them.  This is intended only for testing, and to make the installation  
+go a bit smoother.  You should remove them before moving into a  
+production environment.  
+  
+Remove anonymous users? [Y/n] Y ←匿名ユーザアカウントを削除する設定  
+ ... Success!  
+  
+Normally, root should only be allowed to connect from 'localhost'.  This  
+ensures that someone cannot guess at the root password from the network.  
+  
+Disallow root login remotely? [Y/n] Y ←リモートルートログインを無効にする設定  
+ ... Success!  
+
+By default, MariaDB comes with a database named 'test' that anyone can  
+access.  This is also intended only for testing, and should be removed  
+before moving into a production environment.  
+  
+Remove test database and access to it? [Y/n] Y ←テスト用のデータベースを削除する設定  
+ - Dropping test database...  
+ ... Success!  
+ - Removing privileges on test database...  
+ ... Success!  
+  
+Reloading the privilege tables will ensure that all changes made so far  
+will take effect immediately.  
+  
+Reload privilege tables now? [Y/n] Y　←権限テーブルを再ロードし変更を保存する  
+  
+ ... Success!  
+  
+Cleaning up...  
+  
+All done!  If you've completed all of the above steps, your MariaDB ←All doneの記載があればOK  
+installation should now be secure.  
+  
+Thanks for using MariaDB!  
+[ec2-user@ip-172-31-33-39 ~]$  
+  
+2⃣MariaDBの状態を確認する  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl status mariadb  
+● mariadb.service - MariaDB 10.5 database server  
+     Loaded: loaded (/usr/lib/systemd/system/mariadb.service; disabled; preset: disabled)  
+     Active: active (running) since Tue 2025-04-08 18:06:37 UTC; 22min ago ←active (running)と出ていればOK　qキーで終了  
+     
