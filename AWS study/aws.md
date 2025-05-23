@@ -21,7 +21,6 @@
   
 「ssh -iコマンドを使用してログインしようとしてもエラーが出たとき」  
   
-bash```
 ]$ ssh -i test-ec2-key.pem ec2-user@10.0.2.105
 The authenticity of host '10.0.2.105 (10.0.2.105)' can't be established.
 ED25519 key fingerprint is SHA256:9WSUF+/hbvsQ3k6EI9G7PPpg+/zfH41NMftwn3s5ePM.
@@ -36,4 +35,5 @@ It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
 Load key "test-ec2-key.pem": bad permissions
 ec2-user@10.0.2.105: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)
-```
+
+原因；秘密鍵ファイル（test-ec2-key.pem）のパーミッションが適切でないため、SSH接続が拒否されたケース
