@@ -34,4 +34,5 @@ Permissions 0644 for 'test-ec2-key.pem' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
 Load key "test-ec2-key.pem": bad permissions
-ec2-user@10.0.2.105: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)```
+ec2-user@10.0.2.105: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)
+```
