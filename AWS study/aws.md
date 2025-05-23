@@ -21,7 +21,8 @@
   
 「ssh -iコマンドを使用してログインしようとしてもエラーが出たとき」  
   
-bash```$ ssh -i test-ec2-key.pem ec2-user@10.0.2.105
+bash```
+]$ ssh -i test-ec2-key.pem ec2-user@10.0.2.105
 The authenticity of host '10.0.2.105 (10.0.2.105)' can't be established.
 ED25519 key fingerprint is SHA256:9WSUF+/hbvsQ3k6EI9G7PPpg+/zfH41NMftwn3s5ePM.
 This key is not known by any other names
