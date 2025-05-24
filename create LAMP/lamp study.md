@@ -305,7 +305,8 @@ Complete!　←コンプリートが出ればOK
 [ec2-user@ip-172-31-33-39 ~]$ sudo systemctl restart php-fpm  
   
 3⃣phpmyAdminをダウンロードする  
-[ec2-user@ip-172-31-33-39 ~]$ cd /var/www/html/　←ダウンロード先のディレクトリに移動  
+[ec2-user@ip-172-31-33-39 ~]$ cd /var/www/html/  
+※事前にダウンロード先のディレクトリに移動しておく  
 ```
 [ec2-user@ip-172-31-33-39 html]$ wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 --2025-05-24 13:25:12--  https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
@@ -323,4 +324,18 @@ Saving to: ‘phpMyAdmin-latest-all-languages.tar.gz’
 phpMyAdmin-latest-all-languages.tar.gz               100%[=====================================================================================================================>]  13.13M  27.3MB/s    in 0.5s    
 
 2025-05-24 13:25:13 (27.3 MB/s) - ‘phpMyAdmin-latest-all-languages.tar.gz’ saved [13764534/13764534]
+```
+  
+4⃣下記のコマンドでphpAdminファイルを解凍する  
+mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1  
+意味：phpmyAdminというディレクトリを作成し、その中に圧縮ファイル「phpMyAdmin-latest-all-languages.tar.gz」を入れて、解凍するという意味  
+  
+5⃣ダウンロードしたパッケージを削除しておく  
+[ec2-user@ip-172-31-33-39 html]$ rm phpMyAdmin-latest-all-languages.tar.gz　←何も表示されなければOK  
+  
+4⃣phpMyAdminの中身を確認しておく（下記のようになっていればOK）  
+```
+[ec2-user@ip-172-31-33-39 html]$ ls phpMyAdmin/
+CONTRIBUTING.md  LICENSE  RELEASE-DATE-5.2.2  composer.json  config.sample.inc.php  examples     index.php  libraries  package.json  setup                   sql        themes   vendor
+ChangeLog        README   babel.config.json   composer.lock  doc                    favicon.ico  js         locale     robots.txt    show_config_errors.php  templates  url.php  yarn.lock
 ```
