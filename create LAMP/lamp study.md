@@ -306,7 +306,8 @@ Complete!　←コンプリートが出ればOK
   
 3⃣phpmyAdminをダウンロードする  
 [ec2-user@ip-172-31-33-39 ~]$ cd /var/www/html/　←ダウンロード先のディレクトリに移動  
-```[ec2-user@ip-172-31-33-39 html]$ wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+```
+[ec2-user@ip-172-31-33-39 html]$ wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 --2025-05-24 13:25:12--  https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 Resolving www.phpmyadmin.net (www.phpmyadmin.net)... 95.173.204.22, 178.249.213.26, 178.249.213.3, ...
 Connecting to www.phpmyadmin.net (www.phpmyadmin.net)|95.173.204.22|:443... connected.
@@ -321,4 +322,5 @@ Saving to: ‘phpMyAdmin-latest-all-languages.tar.gz’
 
 phpMyAdmin-latest-all-languages.tar.gz               100%[=====================================================================================================================>]  13.13M  27.3MB/s    in 0.5s    
 
-2025-05-24 13:25:13 (27.3 MB/s) - ‘phpMyAdmin-latest-all-languages.tar.gz’ saved [13764534/13764534]```
+2025-05-24 13:25:13 (27.3 MB/s) - ‘phpMyAdmin-latest-all-languages.tar.gz’ saved [13764534/13764534]
+```
