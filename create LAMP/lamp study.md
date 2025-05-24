@@ -288,3 +288,37 @@ Created symlink /etc/systemd/system/mysql.service → /usr/lib/systemd/system/ma
 Created symlink /etc/systemd/system/mysqld.service → /usr/lib/systemd/system/mariadb.service.  
 Created symlink /etc/systemd/system/multi-user.target.wants/mariadb.service → /usr/lib/systemd/system/mariadb.service.  
 [ec2-user@ip-172-31-33-39 ~]$ exit ←一度ログアウトしてsystemctl statusで起動しているか確認  
+  
+phpMyAdminのインストール  
+1⃣sudo dnf install php-mbstring php-xml -y　コマンドでインストール  
+  
+[ec2-user@ip-172-31-33-39 ~]$ sudo dnf install php-mbstring php-xml -y  
+Last metadata expiration check: 0:01:31 ago on Sat May 24 13:05:55 2025.  
+Package php8.3-mbstring-8.3.16-1.amzn2023.0.1.x86_64 is already installed.  
+Package php8.3-xml-8.3.16-1.amzn2023.0.1.x86_64 is already installed.  
+Dependencies resolved.  
+Nothing to do.  
+Complete!　←コンプリートが出ればOK  
+  
+2⃣反映させるためにsystemctlコマンドで再起動（2種類の再起動実施）  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl restart httpd  
+[ec2-user@ip-172-31-33-39 ~]$ sudo systemctl restart php-fpm  
+  
+3⃣phpmyAdminをダウンロードする  
+[ec2-user@ip-172-31-33-39 ~]$ cd /var/www/html/　←ダウンロード先のディレクトリに移動  
+```[ec2-user@ip-172-31-33-39 html]$ wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+--2025-05-24 13:25:12--  https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+Resolving www.phpmyadmin.net (www.phpmyadmin.net)... 95.173.204.22, 178.249.213.26, 178.249.213.3, ...
+Connecting to www.phpmyadmin.net (www.phpmyadmin.net)|95.173.204.22|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://files.phpmyadmin.net/phpMyAdmin/5.2.2/phpMyAdmin-5.2.2-all-languages.tar.gz [following]
+--2025-05-24 13:25:13--  https://files.phpmyadmin.net/phpMyAdmin/5.2.2/phpMyAdmin-5.2.2-all-languages.tar.gz
+Resolving files.phpmyadmin.net (files.phpmyadmin.net)... 178.249.213.26, 95.173.204.15, 95.173.204.25, ...
+Connecting to files.phpmyadmin.net (files.phpmyadmin.net)|178.249.213.26|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 13764534 (13M) [application/octet-stream]
+Saving to: ‘phpMyAdmin-latest-all-languages.tar.gz’
+
+phpMyAdmin-latest-all-languages.tar.gz               100%[=====================================================================================================================>]  13.13M  27.3MB/s    in 0.5s    
+
+2025-05-24 13:25:13 (27.3 MB/s) - ‘phpMyAdmin-latest-all-languages.tar.gz’ saved [13764534/13764534]```
