@@ -39,3 +39,6 @@ ec2-user@10.0.2.105: Permission denied (publickey,gssapi-keyex,gssapi-with-mic)
 原因:秘密鍵ファイル（test-ec2-key.pem）のパーミッションが適切でないため、SSH接続が拒否されたケース  
   
  →　chmod 400 test-ec2-key.pem　でパーミッションを読み取り専用にしてセキュリティを高める  
+  
+「基本的なログイン」  
+ssh -i 鍵ファイル名 ユーザー名@入りたいIPアドレス
