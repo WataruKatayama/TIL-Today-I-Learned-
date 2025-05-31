@@ -369,15 +369,61 @@ WordPressのインストール
   ３.ユーザ情報とパスワードを作成する  
   　→CREATE USER '設定したいユーザ名'@'前文にあるユーザが許可されているホスト（例:localhost）' IDENTIFIED BY '設定したいパスワード';  
     →Query OKが出れば設定OK  
+    ※メモ帳などにホスト名,パスワードを保存しておく  
   ４.データベースの作成  
   　→CREATE DATABASE \`設定したいデータベース名\`;  
     →Query OKが出れば設定OK  
+    ※メモ帳などにDB名を保存しておく  
   ５.ユーザに権限を付与  
   　→GRANT ALL PRIVILEGES ON \`上記で設定したデータベース名\`.* TO "上記で設定したユーザ名"@"上記で設定したホスト名";  
     →GRANT ALL PRIVILEGES ON ：権限をすべて付与するコマンド  
-    →Query OKが出れば設定OK  
+    →Query OKが出れば設定OK    
   ６.反映させるために再読み込みさせる  
     →FLUSH PRIVILEGES;  
     →Query OKが出れば設定OK  
   ７.最後にexitでログアウト  
-    
+  
+5⃣WordPressのダウンロード  
+　１.wget https://ja.wordpress.org/latest-ja.tar.gzでダウンロード  
+　　→lsコマンドでlatest-ja.tar.gzが表示されればOK  
+　２.tar -xzf latest-ja.tar.gzで解凍作業を行う  
+ 　　→lsでWordpressディレクトリが表示されていればOK  
+  
+6⃣WordPressの設定ファイルを編集  
+　１.Wordpressディレクトリにある設定ファイルのサンプルをコピーし、それを編集する  
+ 　　※wp-config-sample.phpという設定ファイルがある  
+    →cp wordpress/wp-config-sample.php wordpress/wp-config.phpコマンドでwp-config-sample.phpの中身をwp-config.phpというファイルにコピーする  
+  ２.vimコマンドで編集する  
+　　→vim wordpress/wp-config.php  
+  ３.「Database settings」項目の中にある、define()内のDB_NAME 、DB_USER 、DB_PASSWORD 、DB_HOSTを設定する  
+  　→右隣にある''内の文字列を編集する　カーソルを合わせてcwと入力(文字を上書きして挿入モード)　→　上記で設定したDB名を入力する　→　escキーで別の箇所に移動する  
+  　　※上記の操作でユーザ名・パスワード・ホスト名を入力する  
+  ４.「Authentication unique keys and salts.」内（認証用ユニークキーという）にあるURL（soltまで）をコピーしてブラウザで検索する  
+  ５.自動で作られたユニークキーが表示されるので、それを全てコピーする  
+  ６.「Authentication unique keys and salts.」内のdefine()一覧があるのでそこに５.でコピーした内容を追記する  
+  　→最初のdefine()の行の先頭にカーソルを合わせて、iキー(挿入モード)　→　ペースト　→　escキーでノーマルモードに戻す  
+  ７.もともとあったdefine()の行は不要なので削除する  
+  　→消したい行にカーソルをあて、ddで削除  
+  ８.escキーを押して、:wqで保存して終了する  
+  
+7⃣ドキュメントルートにファイルを配置  
+　１.mkdirでブログディレクトリを作成  
+ 　　→mkdir /var/www/html/blog  
+  ２.ユーザのホームディレクトリ配下にあるWordpressディレクトリ配下のディレクトリを１.の配下にコピーする  
+  　→cp -r wordpress/* /var/www/html/blog/  
+    ※ls /var/www/html/blog/コマンドでコピーされたか確認する  
+  ４.wirdpressのパーマメントリンク（永久保存されるURL）が機能するように設定する→Apacheで.htaccessファイルを有効にすればよい  
+  　ⅰ.sudo vim /etc/httpd/conf/httpd.confコマンドでApacheの設定ファイルを開く  
+    ⅱ.Apacheがウェブページのファイルを探すディレクトリ（ここでは/var/www/htmlに関する設定が記載されている部分)を探す  
+    　→/Directoryで検索し、nキーを何度かたたくと<Directory "/var/www/html"> ～～～</Directory>の中にAllowOverride Noneがあるのでそこを編集する  
+    ⅲ. Noneにカーソルを合わせてcw(文字を上書きして挿入モード)、NoneからAllに編集  
+    ⅳ.escキーで戻り、:wqで終了  
+  
+8⃣画像のリサイズなどを行えるPHPグラフィック描画ライブラリをインストール  
+　→sudo dnf install php-gd -y  
+　→Complete!がでればOK  
+  
+9⃣Apacheドキュメントルートの書き込み権限があるか確認する  
+　→ls -l /var/www/  
+　→drwxrwsr-x. 4 ec2-user apache 71 May 31 16:01 html　左のように読み書きの権限があり、ユーザがec2であること、グループがApacheであることを確認する  
+ 
