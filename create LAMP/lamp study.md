@@ -358,3 +358,26 @@ WordPressのインストール
   ５.「ElasticIPアドレスの関連付け」をクリック  
   ６.リソースタイプは「インスタンス」、インスタンスは起動中のインスタンスを選択し、「関連付ける」をクリック  
   ７.元の一覧に戻るので対象のIPアドレスにチェックを入れ、下の概要に関連付けられたインスタンスが表示されえていればOK  
+  
+4⃣データベースのユーザ作成およびパスワード設定  
+　１.データベース、SQL（今回はMariaDB）が起動していることを確認  
+　　→sudo systemctl status mariadb　→　activeが出てればOK(ｑで通常画面に戻る)  
+  　→sudo systemctl status httpd　→　activeが出てればOK(ｑで通常画面に戻る)  
+  ２.データベースサーバにrootユーザとしてログインする  
+  　→sudo mysql -u root -p(mariaDBでもMyAQLコマンドを使用する)  
+   　→MariaDB [(none)]>が出ればログインOK  
+  ３.ユーザ情報とパスワードを作成する  
+  　→CREATE USER '設定したいユーザ名'@'前文にあるユーザが許可されているホスト（例:localhost）' IDENTIFIED BY '設定したいパスワード';  
+    →Query OKが出れば設定OK  
+  ４.データベースの作成  
+  　→CREATE DATABASE `設定したいデータベース名`;  
+    →Query OKが出れば設定OK  
+  ５.ユーザに権限を付与  
+  　→GRANT ALL PRIVILEGES ON `上記で設定したデータベース名`.* TO "上記で設定したユーザ名"@"上記で設定したホスト名";  
+    →GRANT ALL PRIVILEGES ON ：権限をすべて付与するコマンド  
+    →Query OKが出れば設定OK  
+  ６.反映させるために再読み込みさせる  
+    →FLUSH PRIVILEGES;  
+    →Query OKが出れば設定OK  
+  ７.最後にexitでログアウト  
+    
