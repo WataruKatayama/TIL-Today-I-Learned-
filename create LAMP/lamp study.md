@@ -338,4 +338,13 @@ mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdm
 [ec2-user@ip-172-31-33-39 html]$ ls phpMyAdmin/
 CONTRIBUTING.md  LICENSE  RELEASE-DATE-5.2.2  composer.json  config.sample.inc.php  examples     index.php  libraries  package.json  setup                   sql        themes   vendor
 ChangeLog        README   babel.config.json   composer.lock  doc                    favicon.ico  js         locale     robots.txt    show_config_errors.php  templates  url.php  yarn.lock
-```
+```  
+  
+WordPressのインストール  
+1⃣sudo dnf install php-mysqlnd -yコマンドでphp-mysqlndをインストール  
+※php-mysqlnd：PHPとMySQLを連携させるためのPHP拡張モジュール  
+　→これをインストールするとPHPスクリプトがMySQLデータベースに接続できる  
+  
+2⃣Complete!が表示されればOK  
+  
+3⃣エラスティックIPアドレスを固定させる（1時間あたり0.75円の課金発生）  
