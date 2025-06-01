@@ -384,7 +384,7 @@ WordPressのインストール
   ７.最後にexitでログアウト  
   
 5⃣WordPressのダウンロード  
-　１.wget \https://ja.wordpress.org/latest-ja.tar.gzでダウンロード  
+　１.wget <https://ja.wordpress.org/latest-ja.tar.gz>でダウンロード  
 　　→lsコマンドでlatest-ja.tar.gzが表示されればOK  
 　２.tar -xzf latest-ja.tar.gzで解凍作業を行う  
  　　→lsでWordpressディレクトリが表示されていればOK  
