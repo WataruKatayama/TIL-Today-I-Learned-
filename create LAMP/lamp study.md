@@ -384,7 +384,7 @@ WordPressのインストール
   ７.最後にexitでログアウト  
   
 5⃣WordPressのダウンロード  
-　１.wget https://ja.wordpress.org/latest-ja.tar.gzでダウンロード  
+　１.wget \https://ja.wordpress.org/latest-ja.tar.gzでダウンロード  
 　　→lsコマンドでlatest-ja.tar.gzが表示されればOK  
 　２.tar -xzf latest-ja.tar.gzで解凍作業を行う  
  　　→lsでWordpressディレクトリが表示されていればOK  
@@ -426,4 +426,5 @@ WordPressのインストール
 9⃣Apacheドキュメントルートの書き込み権限があるか確認する  
 　→ls -l /var/www/  
 　→drwxrwsr-x. 4 ec2-user apache 71 May 31 16:01 html　左のように読み書きの権限があり、ユーザがec2であること、グループがApacheであることを確認する  
- 
+  
+上記までの工程で、一通りのLAMP環境の構築が完了となる。
