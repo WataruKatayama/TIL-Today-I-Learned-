@@ -427,4 +427,86 @@ WordPressのインストール
 　→ls -l /var/www/  
 　→drwxrwsr-x. 4 ec2-user apache 71 May 31 16:01 html　左のように読み書きの権限があり、ユーザがec2であること、グループがApacheであることを確認する  
   
-上記までの工程で、一通りのLAMP環境の構築が完了となる。
+上記までの工程で、一通りのLAMP環境の構築が完了となる。  
+  
+「運用・保守」  
+・dnfコマンド
+　dnf check-updateコマンドでアップデートできるパッケージがあるかどうか確認できる。  
+ `[ec2-user@ip-172-31-33-39 ~]$ dnf check-update`  
+ `Amazon Linux 2023 repository                                                                                     35 MB/s |  33 MB     00:00`       `Amazon Linux 2023 Kernel Livepatch repository                                                                   108 kB/s |  16 kB     00:00`  
+  
+　sudo dnf update -yコマンドでアップデートできるすべてのパッケージをアップデートする(-yですべての確認にyesで答えるようにする)  
+ →Complete!が出ればOK  
+ ※特定のパッケージのみをアップデートしたい場合は下記の通りにする  
+　sudo dnf update アップデートさせたいもの（例：httpd）  
+ ※注意  
+ 　いきなり商用本番環境でdnfのアップデートは実行しない！！  
+　　→アップデートで不具合が発生する場合があるから。本番と同等の別の環境（ステージング環境）でまずは実施して実験する！！  
+  
+・uptimeコマンド  
+　→システムの連続稼働時間を確認できるコマンド  
+  `[ec2-user@ip-172-31-33-39 ~]$ uptime`  
+　 `05:22:01 up 58 min,  1 user,  load average: 0.00, 0.00, 0.00`  
+  現在時刻　システムの稼働時間　接続しているユーザ数　サーバ平均負荷　1分　５分　１５分  
+  ※サーバ平均負荷時間はOSがシステム稼働中にクラッシュしていないかどうかの重要な指標となる  
+  
+・dfコマンド  
+　→ディスクの空き容量を確認  
+ `[ec2-user@ip-172-31-33-39 ~]$ df -h`　←-hを使用するとわかりやすく表示させることができる  
+`Filesystem      Size  Used Avail Use% Mounted on`  
+`devtmpfs        4.0M     0  4.0M   0% /dev`  
+`tmpfs           475M     0  475M   0% /dev/shm`  
+`tmpfs           190M  464K  190M   1% /run`  
+`/dev/xvda1      8.0G  2.5G  5.5G  31% /`  
+`tmpfs           475M     0  475M   0% /tmp`  
+`/dev/xvda128     10M  1.3M  8.7M  13% /boot/efi`  
+`tmpfs            95M     0   95M   0% /run/user/1000`  
+  
+・duコマンド
+　→ディレクトリやファイルのディスク使用量を確認  
+ du -s 確認したいディレクトリ　（わかりやすくしたい場合は-hも付け足す）  
+ `[ec2-user@ip-172-31-33-39 ~]$ du -s /var/www/html/blog/`  
+　`94564   /var/www/html/blog/`  
+  
+・freeコマンド  
+　→メモリの使用量を確認できる  
+ `[ec2-user@ip-172-31-33-39 ~]$ free -ms 1`  
+ `              total        used        free      shared  buff/cache   available`  
+`Mem:             949         201         402           3         345         604`  
+`Swap:              0           0           0`  
+  
+`               total        used        free      shared  buff/cache   available`  
+`Mem:             949         201         402           3         345         604`  
+`Swap:              0           0           0`  
+  
+`               total        used        free      shared  buff/cache   available`  
+`Mem:             949         201         402           3         345         604`  
+`Swap:              0           0           0`  
+※-mでメガバイト単位（通常はキロバイト単位）、-sで連続表示、1は連続表示する秒間隔をあらわしている  
+  total→ 実メモリの全容量 used →使用量 free →空き容量  shared →共有メモリの空き容量 buff/cache → バッファキャッシュ容量 available →アプリで使用できる容量  
+  
+・topコマンド  
+ →CPUやメモリの使用状況をリアルタイムで確認できる　ｑで終了  
+ `top - 06:24:32 up  2:01,  1 user,  load average: 0.00, 0.00, 0.00`  
+`Tasks: 110 total,   1 running, 109 sleeping,   0 stopped,   0 zombie`  
+`%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni, 93.1 id,  0.0 wa,  0.0 hi,  0.0 si,  6.9 st`  
+`MiB Mem :    949.5 total,    402.1 free,    201.3 used,    346.0 buff/cache`  
+`MiB Swap:      0.0 total,      0.0 free,      0.0 used.    604.8 avail Mem`  
+※上から順に、システムのアップタイムとロードアベレージ、実行中のプロセス数、使用中のＣＰＵ、物理メモリ・仮想メモリの使用状態  
+  
+・vmstatコマンド  
+　→システムの負荷状況をリアルタイムで確認できる  
+ `[ec2-user@ip-172-31-33-39 ~]$ vmstat`　←１をつけるとリアルタイムで表示できる, -SMオプションでメガバイト表示になる  
+`procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----`  
+ `r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st`  
+ `0  0      0 411788   2168 352220    0    0    32    46   44  117  0  0 94  0  5`  
+  
+・psコマンド  
+　→実行中のプロセスを表示できるコマンド  
+ `[ec2-user@ip-172-31-33-39 ~]$ ps`  
+ `   PID TTY          TIME CMD`  
+ `  2859 pts/0    00:00:00 bash`  
+ ` 11073 pts/0    00:00:00 ps`  
+ ※TTY：プロセスが接続されている端末　pts/0：仮想端末への接続を表している　TIME：プロセスが稼働した合計時間　CMD：プロセスを起動したコマンド  
+  
+   
