@@ -97,3 +97,50 @@
 3.「インスタンス」にチェックが入っていることを確認し、インスタンスの検索枠には「api-server-01」を選択する（プライベートIPアドレスは空白のままにする）  
 4.右下の「関連付ける」をクリックし、エラスティックIPアドレスの詳細画面に移動したら、ダッシュボードから「インスタンス」を選択しインスタンスの一覧画面に移る  
 5.パブリックIPv4アドレスにエラスティックIPアドレスが表示されていれば設定完了  
+6.SSH接続を実行し、接続できるかどうか確認する  
+  
+## APIサーバのセッティング(あらかじめAPIサーバにSSH接続しておく)  
+1.ソフトを最新の状態に更新するためにアップデート作業を行う  
+```sudo yum update -y```  
+2.GitHub などからAPIの**ソースコードを取得する  
+```sudo yum install -y git```  
+3.APIサーバを動かすために使われるプログラミング言語であるGo言語をインストールする    
+```sudo yum install -y golang```  
+4.インストール完了確認にGoのバージョンを確認する  
+```go version```   
+5.今回はGitHub上にあるAPIのソースコードを使用するため、一式をローカルにコピーする  
+```git clone https://github.com/CloudTechOrg/cloudtech-reservation-api.git```  
+6.サーバを再起動しても、APIサーバが自動で起動するように設定する  
+　→まずはviエディターを使用し、Goで作ったアプリであるAPIサーバーを自動起動・管理するための設定ファイルを開く  
+ ```sudo vi /etc/systemd/system/goserver.service```  
+7.サービス起動時の設定ファイルを作成  
+```[Unit]```  
+```Description=Go Server```  
+```[Service]```  
+```WorkingDirectory=/home/ec2-user/cloudtech-reservation-api```  
+```ExecStart=/usr/bin/go run main.go```  
+```User=ec2-user```  
+```Restart=always```  
+```[Install]```  
+```WantedBy=multi-user.target```  
+[service内の内容確認]  
+WorkingDirectory	:プログラムのあるフォルダ。プログラムを実行する際の対象ディレクトリを指定。  
+ExecStart	:起動時に実行するコマンド。サービスが起動する際に実行するコマンド（Go言語で作ったアプリmain.go をそのまま実行）  
+          ※ 本番環境では go build でバイナリを作ってから起動するのが一般的。ここでは簡易的に go run を使用。  
+User	:誰の権限で動かすか。ここではサービスを実行するのはec2-user 
+Restart	:サーバが落ちるなど異常終了したら自動で再起動させる  
+  
+[Install内の確認]  
+WantedBy	:サーバーが通常の状態（multi-userモード）で起動したときに、このサービスも自動で起動するようにするモード  
+  
+8.編集した内容を再起動させる  
+```sudo systemctl daemon-reload```  
+9.作成した goserver.service を サーバ起動時に自動で起動させるように設定  
+```sudo systemctl enable goserver.service```  
+10.サービスを起動させる  
+```sudo systemctl start goserver.service```  
+11.Goサーバーは内部で8080ポートで動作しているので要件にもある通りHTTP（80）でアクセスさせるためNginxを使用して中継させる  
+```sudo yum install nginx```  
+```sudo systemctl start nginx```  
+```sudo systemctl enable nginx```  
+12.
