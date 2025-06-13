@@ -139,8 +139,37 @@ WantedBy	:サーバーが通常の状態（multi-userモード）で起動した
 ```sudo systemctl enable goserver.service```  
 10.サービスを起動させる  
 ```sudo systemctl start goserver.service```  
-11.Goサーバーは内部で8080ポートで動作しているので要件にもある通りHTTP（80）でアクセスさせるためNginxを使用して中継させる  
+11.Goサーバーは内部で8080ポートで動作しているので要件にもある通りHTTP（80）でアクセスさせるためNginxを使用して中継させる。まずはNginxのインストールおよび起動作業。  
 ```sudo yum install nginx```  
 ```sudo systemctl start nginx```  
 ```sudo systemctl enable nginx```  
-12.
+12.Goサーバ(8080)をHTTP(80)にアクセスできるようにnginx.confファイルを編集  
+```sudo vi /etc/nginx/nginx.conf```  
+13.serverの箇所を下記に丸ごと上書きで書き換える  
+```server {```  
+```listen 80;```　←HTTPの標準ポート「80番」でリクエストを受け付けるという意味  
+```server_name _;```　←サーバー名の指定。_（アンダースコア）はデフォルト設定（どのドメインでも対応） を意味する  
+``` ```  
+``` location / {```　←/ は ルートパス（＝すべてのURLパス）。つまり、どのURLにアクセスしてもこの中の設定が使われる。  
+```proxy_pass http://localhost:8080;```　← ユーザーから受けたリクエストを 内部の 8080 ポート（＝Goアプリ）に転送する  
+```proxy_http_version 1.1;```　←プロキシとして通信する際に HTTP/1.1 を使用する設定  
+```proxy_set_header Upgrade $http_upgrade;```　←WebSocket通信などのために、元のリクエストヘッダー Upgrade をGoアプリに伝える  
+```proxy_set_header Connection 'upgrade';```　←WebSocketなどの接続の「アップグレード」を明示する。上記と2行あることで、GoアプリがWebSocket対応している場合も正常動作することができる。  
+``` proxy_set_header Host $host;```　←リクエスト元のホスト名（ドメイン名）をGoアプリ側に渡す設定。これによりアプリ側が「どこ経由でアクセスされたか」を知ることができる。  
+```proxy_cache_bypass $http_upgrade;```　← WebSocketなどの リアルタイム通信ではキャッシュを無効にするための設定。  
+``` }```  
+```}```  
+14.Nginxを再起動して設定を反映させる  
+```sudo systemctl restart nginx```  
+15.まずはGoアプリに直接アクセスして接続テスト  
+```curl http://localhost:8080```  
+API接続テストが成功しました が出ればOK  
+16.次にNginx経由で接続テスト  
+```curl http://localhost```  
+同じくAPI接続テストが成功しました が出ればOK  
+17.ブラウザで確認  
+```http://EC2インスタンスのパブリックIPアドレス```  
+ブラウザ画面にAPI接続テストが成功しました が出ればOK  
+  
+## Webサーバの構築  
+  
